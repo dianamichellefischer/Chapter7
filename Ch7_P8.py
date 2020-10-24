@@ -39,6 +39,7 @@ def lighten(image, adjustBy):
             r = int(r * adjustBy)
             g = int(g * adjustBy)
             b = int(b * adjustBy)
+            #add in max to return, then do min for darkening
             lum = r + g + b
             image.setPixel(x, y, (lum, lum, lum))
             
