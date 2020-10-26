@@ -27,41 +27,58 @@ def grayscale(image):
             image.setPixel(x, y, (lum, lum, lum))
             
 
-
-
-
-
-def sepia(image):
-    ##Converts to sepia colors
+                
+#Defines the lighten function                
+def lighten(image, adjustBy):
+    """Converts the argument image to a lighter version"""
+    adjustBy = input("By how much should this be lightened? ")
+    adjustBy = int(adjustBy) 
     for y in range(image.getHeight()):
         for x in range(image.getWidth()):
-            (red, green, blue) = image.getPixel(x, y)
-            if red < 63:
-                red = int(red * 1.1)
-                blue = int(blue * 0.9)
-                image.setPixel(x, y, (red, green, blue))
-            elif red < 192:
-                red = int(red * 1.15)
-                blue = int(blue * 0.85)
-                image.setPixel(x, y, (red, green, blue))
-            else:
-                red = min(int(red * 1.08), 255)
-                blue = int(blue * 0.93)
-                image.setPixel(x, y, (red, green, blue))
-                
-                
+            (r, g, b) = image.getPixel(x, y)
+            r = int(r * adjustBy)
+            g = int(g * adjustBy)
+            b = int(b * adjustBy)
+            #add in max to return, then do min for darkening
+            lum = r + g + b
+            image.setPixel(x, y, (lum, lum, lum))
+            
+#Defines the darken function    
+#def darken(image, adjustBy):
+    """Converts the argument image to a darker version"""
+
+
+#Defines the colorfilter function 
+#def colorfilter(image, (r, g, b)):
 
 
 
-
-
-#call sepia function and show image
+#call function, ask for choise and show image
 def main():
-    grayscale(image)
-    sepia(image)
-    image.draw()
+    print ("                 *   Options to Choose From   *")
+    print ("")
+    print ("                 * Grayscale to Sepia = 1     *")
+    print ("                 *             Lighen = 2     *")
+    print ("                 *             Darken = 3     *")
+    print ("                 *        ColorFilter = 4     *")
+    print ("")
+    print ("")
+    command = input("Enter the number of what you would like to do with your image: ")
+    if command == ('1'):
+        grayscale(image)
+        image.draw()
+        sepia(image)
+        image.draw()
+    elif command == ('2'):
+        lighten(image, adjustBy)
+        image.draw()
+    elif command == ('3'):
+        #darken(image, adjustBy)
+        image.draw()
+    else:
+        #colorfilter
+        image.draw()
 
-if __name__ == "__main__":
-   main()
-
+if __name__ == '__main__':
+    main()
 
